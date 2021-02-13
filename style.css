@@ -96,7 +96,7 @@ body {
 .player .player-list {
   position: absolute;
   width: 100%;
-  margin-top: -350px;
+  margin-top: -20px;
   height: 350px;
   overflow-y: scroll;
   background: rgba(0, 0, 0, 0.8);
@@ -167,4 +167,21 @@ body {
 .player .list .item .details p {
   color: #aaa;
   font-size: 14px;
+}
+
+.player .player-list::-webkit-scrollbar {
+  width: 5px;
+  background: #222;
+}
+
+.player .player-list::-webkit-scrollbar-thumb {
+  background: #00acee;
+}
+
+.player .activeSongList .player-list {
+  margin-top: -350px;
+}
+
+.player .activeSongList .main {
+  filter: blur(5px);
 }
