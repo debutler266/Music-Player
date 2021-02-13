@@ -115,3 +115,36 @@ let player = _(".player"),
     </div>
     `;
   }).join(""));
+
+  let songListItems = _all(".player .player-list .list .item");
+  for(let i=0;i<songListItems.length;i++){
+    songListItems[i].addEventListener("click", function(){
+      currentSongIndex = songListItems[i].getAttribute("songIndex");
+      loadSong(currentSongIndex);
+      player.classList.remove("activeSongList");
+    });
+  }
+
+  //load song after clicked
+  function loadSong(songIndex){
+	let song = songList[songIndex];
+	main.thumbnail.setAttribute("src", "img/"+song.thumbnail);
+	document.body.style.background = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), url("img/${song.thumbnail}") center no-repeat`;
+	document.body.style.backgroundSize = "cover";
+  main.songtitle.innerText = song.songtitle;
+  main.artistname.innerText = song.artistname;
+  main.audio.setAttribute("src", "./audio/"+song.audio);
+  main.seekbar.setAttribute("value",0);
+	main.seekbar.setAttribute("min",0);
+	main.seekbar.setAttribute("max",0);
+  main.audio.addEventListener("canplay",function(){
+		main.audio.play();
+		if(!main.audio.paused){
+			main.playPauseControl.classList.remove("paused");
+		}
+    main.seekbar.setAttribute("max",parseInt(main.audio.duration));
+  })
+};
+setInterval(function(){
+	main.seekbar.value = parseInt(main.audio.currentTime);
+},1000);
