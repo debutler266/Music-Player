@@ -169,3 +169,6 @@ main.playPauseControl.addEventListener("click",function(){
 		main.audio.pause();
 	}
 });
+main.seekbar.addEventListener("change",function(){
+  main.audio.currentTime = main.seekbar.value;
+})
