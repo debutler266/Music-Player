@@ -92,9 +92,9 @@ let player = _(".player"),
     seekbar:_(".player .main input"),
     songtitle:_(".player .main .details h2"),
     artistname:_(".player .main .details p"),
-    prevControl:_(".player .main .control .prev-control"),
-    playPauseControl:_(".player .main .control .play-pause-control"),
-    nextControl:_("player .main .control .next-control")
+    prevControl:_(".player .main .controls .prev-control"),
+    playPauseControl:_(".player .main .controls .play-pause-control"),
+    nextControl:_(".player .main .controls .next-control")
   }
 
   toggleSongList.addEventListener("click", function(){
@@ -148,3 +148,24 @@ let player = _(".player"),
 setInterval(function(){
   main.seekbar.value = parseInt(main.audio.currentTime);
 },1000);
+
+main.prevControl.addEventListener("click",function(){
+	currentSongIndex--;
+	if(currentSongIndex < 0){
+		currentSongIndex = songList.length + currentSongIndex;
+	}
+	loadSong(currentSongIndex);
+});
+main.nextControl.addEventListener("click",function(){
+	currentSongIndex = (currentSongIndex+1) % songList.length;
+	loadSong(currentSongIndex);
+});
+main.playPauseControl.addEventListener("click",function(){
+	if(main.audio.paused){
+		main.playPauseControl.classList.remove("paused");
+		main.audio.play();
+	} else {
+		main.playPauseControl.classList.add("paused");
+		main.audio.pause();
+	}
+});
