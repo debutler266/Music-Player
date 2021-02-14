@@ -74,8 +74,8 @@ let songList = [
   {
     thumbnail:"cover10.jpg",
     audio:"song10.mp3",
-    songtitle:"Title",
-    artistname:"My Name"
+    songtitle:"Song Title",
+    artistname:"Artist Name"
   },
 ];
 
@@ -143,6 +143,9 @@ let player = _(".player"),
     main.playPauseControl.classList.remove("paused");
     }
     main.seekbar.setAttribute("max",parseInt(main.audio.duration));
+    main.audio.onended = function(){
+      main.nextControl.click();
+    }
   })
 }
 setInterval(function(){
@@ -172,3 +175,4 @@ main.playPauseControl.addEventListener("click",function(){
 main.seekbar.addEventListener("change",function(){
   main.audio.currentTime = main.seekbar.value;
 })
+loadSong(currentSongIndex);
